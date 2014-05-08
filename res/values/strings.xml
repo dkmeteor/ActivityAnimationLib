@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ActivityAnimationLib</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="effect_blur">blur</string>
+    <string name="effect_split">split</string>
+    <string name="effect_close">close</string>
+    <string name="effect_twister">twister</string>
+    <string name="effect_folding">folding</string>
+
+</resources>

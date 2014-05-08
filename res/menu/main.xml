@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_twister"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/effect_twister"/>
+    <item
+        android:id="@+id/action_blur"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/effect_blur"/>
+    <item
+        android:id="@+id/action_close"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/effect_close"/>
+    <item
+        android:id="@+id/action_split"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/effect_split"/>
+    <item
+        android:id="@+id/action_folding"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/effect_folding"/>
+
+</menu>
