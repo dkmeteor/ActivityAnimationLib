@@ -15,6 +15,7 @@ import com.dk.animation.R;
 import com.dk.animation.SkewEffect;
 import com.dk.animation.SplitEffect;
 import com.dk.animation.TwisterEffect;
+import com.dk.animation.WaterEffect;
 
 public class MainActivity extends Activity {
 
@@ -23,7 +24,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ActivityAnimationTool.init(new SkewEffect());
+        ActivityAnimationTool.init(new WaterEffect());
         findViewById(R.id.iv).setOnClickListener(new View.OnClickListener() {
 
             @Override

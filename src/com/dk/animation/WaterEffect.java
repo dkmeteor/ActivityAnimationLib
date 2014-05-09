@@ -1,59 +1,50 @@
 package com.dk.animation;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Camera;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
 
-public class SkewEffect extends BaseEffect {
-    public Bitmap mBitmap = null;
-    private ImageView mTopImage;
+import com.dk.animation.water.DrawWaterWave;
+import com.dk.animation.water.DrawWaterWaveWithSina;
+
+public class WaterEffect extends BaseEffect {
+    private Bitmap mBitmap = null;
+    private View mTopImage;
     private int top;
-    private float t = 0;
 
     public void prepareAnimation(final Activity destActivity) {
         mTopImage = createImageView(destActivity, mBitmap);
     }
 
     public void prepare(Activity currActivity) {
-        // Get the content of the activity and put in a bitmap
         View root = currActivity.getWindow().getDecorView().findViewById(android.R.id.content);
+        top = root.getTop();
         root.setDrawingCacheEnabled(true);
         mBitmap = root.getDrawingCache();
-        top = root.getTop();
-
     }
 
     public void cancel() {
     }
 
     public void clean(Activity activity) {
-
         if (mTopImage != null) {
             mTopImage.setLayerType(View.LAYER_TYPE_NONE, null);
             try {
+                // If we use the regular removeView() we'll get a small UI glitch
                 activity.getWindowManager().removeViewImmediate(mTopImage);
             } catch (Exception ignored) {
             }
         }
-
         mBitmap = null;
     }
 
-    private ImageView createImageView(Activity destActivity, Bitmap bmp) {
-        MyImageView imageView = new MyImageView(destActivity);
-        imageView.setImageBitmap(bmp);
-
+    private View createImageView(Activity destActivity, Bitmap bmp) {
+        DrawWaterWaveWithSina imageView = new DrawWaterWaveWithSina(destActivity,bmp);
         WindowManager.LayoutParams windowParams = new WindowManager.LayoutParams();
         windowParams.gravity = Gravity.TOP;
         windowParams.x = 0;
@@ -81,7 +72,6 @@ public class SkewEffect extends BaseEffect {
                     public void handleMessage(Message msg) {
                         switch (msg.what) {
                             case 101:
-                                mTopImage.invalidate();
                                 break;
                             case 102:
                                 clean(destActivity);
@@ -94,20 +84,10 @@ public class SkewEffect extends BaseEffect {
 
                     @Override
                     public void run() {
-                        t=0;
-                        while (t < 1) {
-                            t += 0.08;
-                            callBack.sendEmptyMessage(101);
 
-                            try {
-                                Thread.sleep(20);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        callBack.sendEmptyMessage(102);
-                      
+//                        callBack.sendEmptyMessage(101);
+//
+//                        callBack.sendEmptyMessage(102);
                     }
                 });
 
@@ -117,36 +97,4 @@ public class SkewEffect extends BaseEffect {
         });
     }
 
-    private class MyImageView extends ImageView {
-        private Matrix mMatrix;
-        private Camera mCamera = new Camera();
-        private Paint mPaint = new Paint();
-
-        public MyImageView(Context context) {
-            super(context);
-        }
-
-        @Override
-        protected void onDraw(Canvas canvas) {
-            if (mMatrix != null)
-                mMatrix.reset();
-            mMatrix = SkewEffect.this.getMatrix(canvas.getMatrix(), t, getWidth(), getHeight());
-            mPaint.setAntiAlias(true);
-            canvas.drawBitmap(mBitmap, mMatrix, mPaint);
-        }
-    }
-
-    /**
-     * t should be 0~1;
-     * 
-     * @param t
-     * @param w
-     * @param h
-     * @return
-     */
-    private Matrix getMatrix(Matrix matrix, float t, int w, int h) {
-        matrix.setSkew(t, t );
-        return matrix;
-
-    }
 }
