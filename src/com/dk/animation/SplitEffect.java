@@ -20,7 +20,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
 
-public class SplitEffect extends BaseEffect{
+public class SplitEffect extends BaseEffect {
 
     public Bitmap mBitmap = null;
     private int[] mLoc1;
@@ -40,7 +40,7 @@ public class SplitEffect extends BaseEffect{
         View root = currActivity.getWindow().getDecorView().findViewById(android.R.id.content);
         root.setDrawingCacheEnabled(true);
         mBitmap = root.getDrawingCache();
-
+        
         // If the split Y coordinate is -1 - We'll split the activity equally
         splitYCoord = (splitYCoord != -1 ? splitYCoord : mBitmap.getHeight() / 2);
 

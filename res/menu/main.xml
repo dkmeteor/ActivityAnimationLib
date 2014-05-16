@@ -26,4 +26,15 @@
         android:showAsAction="never"
         android:title="@string/effect_folding"/>
 
+    <item
+        android:id="@+id/action_skew"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/effect_skew"/>
+    
+    <item
+        android:id="@+id/action_water"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/effect_water"/>
 </menu>

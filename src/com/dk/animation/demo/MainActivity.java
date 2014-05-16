@@ -58,6 +58,12 @@ public class MainActivity extends Activity {
             case R.id.action_folding:
                 ActivityAnimationTool.init(new FoldingEffect());
                 break;
+            case R.id.action_skew:
+                ActivityAnimationTool.init(new SkewEffect());
+                break;
+            case R.id.action_water:
+                ActivityAnimationTool.init(new WaterEffect());
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

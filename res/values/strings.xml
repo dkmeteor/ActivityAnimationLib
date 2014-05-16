@@ -9,5 +9,7 @@
     <string name="effect_close">close</string>
     <string name="effect_twister">twister</string>
     <string name="effect_folding">folding</string>
+    <string name="effect_skew">skew</string>
+    <string name="effect_water">water</string>
 
 </resources>

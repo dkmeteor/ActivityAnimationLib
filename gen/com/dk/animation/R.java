@@ -30,16 +30,19 @@ containing a value of this type.
     }
     public static final class drawable {
         public static final int bg=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int p1=0x7f020002;
-        public static final int p2=0x7f020003;
+        public static final int charming=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
+        public static final int p1=0x7f020003;
+        public static final int p2=0x7f020004;
     }
     public static final class id {
         public static final int action_blur=0x7f080002;
         public static final int action_close=0x7f080003;
         public static final int action_folding=0x7f080005;
+        public static final int action_skew=0x7f080006;
         public static final int action_split=0x7f080004;
         public static final int action_twister=0x7f080001;
+        public static final int action_water=0x7f080007;
         public static final int iv=0x7f080000;
     }
     public static final class layout {
@@ -55,8 +58,10 @@ containing a value of this type.
         public static final int effect_blur=0x7f050003;
         public static final int effect_close=0x7f050005;
         public static final int effect_folding=0x7f050007;
+        public static final int effect_skew=0x7f050008;
         public static final int effect_split=0x7f050004;
         public static final int effect_twister=0x7f050006;
+        public static final int effect_water=0x7f050009;
         public static final int hello_world=0x7f050002;
     }
     public static final class style {

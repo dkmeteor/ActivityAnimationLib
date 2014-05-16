@@ -1,5 +1,6 @@
 package com.dk.animation;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
@@ -9,12 +10,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.dk.animation.water.DrawWaterWave;
 import com.dk.animation.water.DrawWaterWaveWithSina;
 
 public class WaterEffect extends BaseEffect {
     private Bitmap mBitmap = null;
-    private View mTopImage;
+    private DrawWaterWaveWithSina mTopImage;
     private int top;
 
     public void prepareAnimation(final Activity destActivity) {
@@ -43,8 +43,8 @@ public class WaterEffect extends BaseEffect {
         mBitmap = null;
     }
 
-    private View createImageView(Activity destActivity, Bitmap bmp) {
-        DrawWaterWaveWithSina imageView = new DrawWaterWaveWithSina(destActivity,bmp);
+    private DrawWaterWaveWithSina createImageView(Activity destActivity, Bitmap bmp) {
+        DrawWaterWaveWithSina imageView = new DrawWaterWaveWithSina(destActivity, bmp);
         WindowManager.LayoutParams windowParams = new WindowManager.LayoutParams();
         windowParams.gravity = Gravity.TOP;
         windowParams.x = 0;
@@ -59,6 +59,7 @@ public class WaterEffect extends BaseEffect {
         return imageView;
     }
 
+    @SuppressLint("HandlerLeak")
     public void animate(final Activity destActivity, final int duration) {
 
         new Handler().post(new Runnable() {
@@ -72,6 +73,7 @@ public class WaterEffect extends BaseEffect {
                     public void handleMessage(Message msg) {
                         switch (msg.what) {
                             case 101:
+                                mTopImage.start(mBitmap.getWidth() / 2, mBitmap.getHeight() / 2);
                                 break;
                             case 102:
                                 clean(destActivity);
@@ -85,9 +87,9 @@ public class WaterEffect extends BaseEffect {
                     @Override
                     public void run() {
 
-//                        callBack.sendEmptyMessage(101);
-//
-//                        callBack.sendEmptyMessage(102);
+                        callBack.sendEmptyMessage(101);
+                        //
+                        // callBack.sendEmptyMessage(102);
                     }
                 });
 

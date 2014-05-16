@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Gravity;
@@ -15,7 +16,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-public class CloseEffect extends BaseEffect{
+public class CloseEffect extends BaseEffect {
     public Bitmap mBitmap = null;
     private ImageView mTopImage;
     private int top;
@@ -35,7 +36,7 @@ public class CloseEffect extends BaseEffect{
     }
 
     public void cancel() {
-        
+
     }
 
     public void clean(Activity activity) {
@@ -120,6 +121,8 @@ public class CloseEffect extends BaseEffect{
         private Matrix mMatrix;
         private Camera mCamera = new Camera();
 
+        private Paint mPaint = new Paint();
+
         public MyImageView(Context context) {
             super(context);
         }
@@ -129,9 +132,10 @@ public class CloseEffect extends BaseEffect{
             if (mMatrix != null)
                 mMatrix.reset();
             mMatrix = CloseEffect.this.getMatrix(canvas.getMatrix(), t, getWidth(), getHeight());
+//            canvas.drawBitmap(mBitmap, mMatrix, mPaint);
 
-            canvas.drawBitmap(mBitmap, mMatrix, new Paint());
         }
+
     }
 
     /**

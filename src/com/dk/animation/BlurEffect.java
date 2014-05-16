@@ -4,6 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Camera;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.os.Build.VERSION;
 import android.os.Handler;
@@ -78,7 +82,7 @@ public class BlurEffect extends BaseEffect {
     public void animate(final Activity destActivity, final int duration) {
 
         new Handler().post(new Runnable() {
-            private float alpha = 1;
+            private int alpha = 255;
 
             @Override
             public void run() {
@@ -89,8 +93,8 @@ public class BlurEffect extends BaseEffect {
                     public void handleMessage(Message msg) {
                         switch (msg.what) {
                             case 101:
-                                mTopImage.setImageBitmap(mScaledBitmap);
                                 mTopImage.setAlpha(alpha);
+                                mTopImage.setImageBitmap(mScaledBitmap);
                                 System.out.println("refresh:" + alpha);
                                 break;
                             case 102:
@@ -105,13 +109,14 @@ public class BlurEffect extends BaseEffect {
                     @Override
                     public void run() {
                         while (alpha > 0) {
-                            if (alpha > 0.8) {
+                            if (alpha > 0) {
                                 mScaledBitmap = apply(destActivity, mScaledBitmap, 3);
+
                             }
-                            if (alpha > 0.8) {
-                                alpha -= 0.02;
+                            if (alpha > 180) {
+                                alpha -= 5;
                             } else {
-                                alpha -= 0.12;
+                                alpha -= 20;
                             }
                             callBack.sendEmptyMessage(101);
 
