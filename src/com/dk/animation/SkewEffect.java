@@ -94,7 +94,7 @@ public class SkewEffect extends BaseEffect {
 
                     @Override
                     public void run() {
-                        t=0;
+                        t = 0;
                         while (t < 1) {
                             t += 0.08;
                             callBack.sendEmptyMessage(101);
@@ -107,7 +107,7 @@ public class SkewEffect extends BaseEffect {
                         }
 
                         callBack.sendEmptyMessage(102);
-                      
+
                     }
                 });
 
@@ -145,7 +145,7 @@ public class SkewEffect extends BaseEffect {
      * @return
      */
     private Matrix getMatrix(Matrix matrix, float t, int w, int h) {
-        matrix.setSkew(t, t );
+        matrix.setSkew(t, t);
         return matrix;
 
     }

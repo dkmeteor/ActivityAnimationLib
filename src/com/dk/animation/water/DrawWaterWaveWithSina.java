@@ -1,12 +1,8 @@
 package com.dk.animation.water;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.view.MotionEvent;
 import android.widget.ImageView;
 
 public class DrawWaterWaveWithSina extends ImageView implements Runnable {
@@ -85,10 +81,10 @@ public class DrawWaterWaveWithSina extends ImageView implements Runnable {
         } else {
             float distance = (float)Math.sqrt(distance2);
             float amount = amplitude * (float)Math.sin(distance / wavelength * TWO_PI - phase / TWO_PI);
-//             float amount = amplitude * (float)Math.sin(distance / WT - PW);
+            // float amount = amplitude * (float)Math.sin(distance / WT - PW);
             amount *= (radius - distance) / radius;
-            if (distance != 0)
-                amount *= wavelength / distance;
+            // if (distance != 0)
+            // amount *= wavelength / distance;
             out[0] = (int)(x + dx * amount);
             out[1] = (int)(y + dy * amount);
             out[2] = (int)distance;
@@ -102,29 +98,23 @@ public class DrawWaterWaveWithSina extends ImageView implements Runnable {
             for (int j = 0; j < height; j++) {
                 if (transformInverse(i, j, temp)) {
                     if (temp[0] >= width || temp[1] >= height || temp[0] < 0 || temp[1] < 0) {
-                        // mBitmap2[j * width + i] = 0x00000000;
+                        mBitmap2[j * width + i] = 0x00000000;
                     } else {
+//                        mBitmap2[j * width + i] = (mBitmap1[temp[1] * width + temp[0]] & 0x00ffffff)
+//                                + (int)((1 - temp[2] / (float)radius) * alpha) << 24;
                         mBitmap2[j * width + i] = (mBitmap1[temp[1] * width + temp[0]] & 0x00ffffff)
-                                + (int)((1 - temp[2] / (float)radius) * alpha) << 24;
-
-                        
-                        
-                        // mBitmap2[j * width + i] = (mBitmap1[temp[1] * width + temp[0]]);
-
+                                +  (alpha << 24);
                     }
                 } else {
                     if (temp[0] >= width || temp[1] >= height || temp[0] < 0 || temp[1] < 0) {
-                        // mBitmap2[j * width + i] = 0x00000000;
+                         mBitmap2[j * width + i] = 0x00000000;
                     } else {
-                        // mBitmap2[j * width + i] = mBitmap1[temp[1] * width + temp[0]];
+                         mBitmap2[j * width + i] = mBitmap1[temp[1] * width + temp[0]];
                     }
                 }
 
             }
     }
-
-    private double WT = TWO_PI / wavelength;
-    private double PW = phase / TWO_PI;
 
     @Override
     public void run() {
@@ -137,14 +127,13 @@ public class DrawWaterWaveWithSina extends ImageView implements Runnable {
             // filter.radius2++;
             phase += 5;
             radius += 5;
-            amplitude /= 1.08;
-            PW = phase / TWO_PI;
-            if (amplitude < 0.1) {
+            amplitude /= 1.12;
+            if (amplitude < 0.01) {
                 stop();
                 return;
             }
             if (alpha > 0) {
-                alpha -= 1;
+                alpha -= 5;
             } else {
                 alpha = 0;
             }

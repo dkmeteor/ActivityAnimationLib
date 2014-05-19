@@ -3,12 +3,10 @@ package com.dk.animation;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Camera;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
-import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Gravity;
@@ -70,13 +68,15 @@ public class CloseEffect extends BaseEffect {
         return imageView;
     }
 
+    
     public void animate(final Activity destActivity, final int duration) {
 
+        //make sure it is run in main thread
         new Handler().post(new Runnable() {
 
             @Override
             public void run() {
-
+                //callback UI thread
                 final Handler callBack = new Handler() {
 
                     @Override
@@ -119,8 +119,6 @@ public class CloseEffect extends BaseEffect {
 
     private class MyImageView extends ImageView {
         private Matrix mMatrix;
-        private Camera mCamera = new Camera();
-
         private Paint mPaint = new Paint();
 
         public MyImageView(Context context) {
@@ -132,7 +130,7 @@ public class CloseEffect extends BaseEffect {
             if (mMatrix != null)
                 mMatrix.reset();
             mMatrix = CloseEffect.this.getMatrix(canvas.getMatrix(), t, getWidth(), getHeight());
-//            canvas.drawBitmap(mBitmap, mMatrix, mPaint);
+            canvas.drawBitmap(mBitmap, mMatrix, mPaint);
 
         }
 
@@ -169,11 +167,6 @@ public class CloseEffect extends BaseEffect {
         dst[7] = h - 0.5f * h * t;
 
         matrix.setPolyToPoly(src, 0, dst, 0, 4);
-
-        for (int i = 0; i < 8; i++) {
-            System.out.print(" " + dst[i]);
-        }
-        System.out.println();
         return matrix;
     }
 }

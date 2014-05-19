@@ -40,7 +40,7 @@ public class SplitEffect extends BaseEffect {
         View root = currActivity.getWindow().getDecorView().findViewById(android.R.id.content);
         root.setDrawingCacheEnabled(true);
         mBitmap = root.getDrawingCache();
-        
+
         // If the split Y coordinate is -1 - We'll split the activity equally
         splitYCoord = (splitYCoord != -1 ? splitYCoord : mBitmap.getHeight() / 2);
 
@@ -130,7 +130,11 @@ public class SplitEffect extends BaseEffect {
 
     public void animate(final Activity destActivity, final int duration) {
         final Interpolator interpolator = new DecelerateInterpolator();
-
+        destActivity.getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
+        
+        
         new Handler().post(new Runnable() {
 
             @Override
@@ -159,7 +163,6 @@ public class SplitEffect extends BaseEffect {
                     }
                 });
 
-                // Animating the 2 parts away from each other
                 Animator anim1 = ObjectAnimator.ofFloat(mTopImage, "translationY", mTopImage.getHeight() * -1);
                 Animator anim2 = ObjectAnimator.ofFloat(mBottomImage, "translationY", mBottomImage.getHeight());
 
@@ -171,6 +174,7 @@ public class SplitEffect extends BaseEffect {
                 mSetAnim.setDuration(duration);
                 mSetAnim.playTogether(anim1, anim2);
                 mSetAnim.start();
+
             }
         });
     }

@@ -34,6 +34,8 @@ containing a value of this type.
         public static final int ic_launcher=0x7f020002;
         public static final int p1=0x7f020003;
         public static final int p2=0x7f020004;
+        public static final int p3=0x7f020005;
+        public static final int p4=0x7f020006;
     }
     public static final class id {
         public static final int action_blur=0x7f080002;
