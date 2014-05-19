@@ -52,9 +52,9 @@ public class MainActivity extends Activity {
             case R.id.action_split:
                 ActivityAnimationTool.init(new SplitEffect());
                 break;
-            case R.id.action_twister:
-                ActivityAnimationTool.init(new TwisterEffect());
-                break;
+//            case R.id.action_twister:
+//                ActivityAnimationTool.init(new TwisterEffect());
+//                break;
             case R.id.action_folding:
                 ActivityAnimationTool.init(new FoldingEffect());
                 break;

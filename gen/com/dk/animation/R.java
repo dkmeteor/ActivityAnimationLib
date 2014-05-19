@@ -38,13 +38,12 @@ containing a value of this type.
         public static final int p4=0x7f020006;
     }
     public static final class id {
-        public static final int action_blur=0x7f080002;
-        public static final int action_close=0x7f080003;
-        public static final int action_folding=0x7f080005;
-        public static final int action_skew=0x7f080006;
-        public static final int action_split=0x7f080004;
-        public static final int action_twister=0x7f080001;
-        public static final int action_water=0x7f080007;
+        public static final int action_blur=0x7f080001;
+        public static final int action_close=0x7f080002;
+        public static final int action_folding=0x7f080004;
+        public static final int action_skew=0x7f080005;
+        public static final int action_split=0x7f080003;
+        public static final int action_water=0x7f080006;
         public static final int iv=0x7f080000;
     }
     public static final class layout {
